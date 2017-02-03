@@ -40,23 +40,23 @@ public class SettingsDialog extends Stage {
 	private class Controller {
 		public void updateControls() {
 			StringBuilder sb = new StringBuilder();
-			sb.append("SCREEN_WIDTH: " + Settings.SCREEN_WIDTH + "\n");
-			sb.append("SCREEN_HEIGHT: " + Settings.SCREEN_HEIGHT + "\n");
-			sb.append("SCREEN_BACKGROUND: " + Settings.SCREEN_BACKGROUND + "\n");
-			sb.append("GOAL_X: " + Settings.GOAL_X + "\n");
-			sb.append("GOAL_Y: " + Settings.GOAL_Y + "\n");
-			sb.append("GOAL_RADIUS: " + Settings.GOAL_RADIUS + "\n");
-			sb.append("GOAL_COLOR: " + Settings.GOAL_COLOR + "\n");
-			sb.append("OBSTACLE_COLOR: " + Settings.OBSTACLE_COLOR + "\n");
-			sb.append("ANT_LIFETIME: " + Settings.ANT_LIFETIME + "\n");
-			sb.append("ANT_POPULATION: " + Settings.ANT_POPULATION + "\n");
-			sb.append("ANT_START_X: " + Settings.ANT_START_X + "\n");
-			sb.append("ANT_START_Y: " + Settings.ANT_START_Y + "\n");
-			sb.append("ANT_COLOR: " + Settings.ANT_COLOR + "\n");
-			sb.append("ANT_SIZE: " + Settings.ANT_SIZE + "\n");
-			sb.append("ANT_SPEED: " + Settings.ANT_SPEED + "\n");
-			sb.append("ANT_MUTATION_RATE: " + Settings.ANT_MUTATION_RATE + "\n");
-			sb.append("ANT_HIT_PENALTY: " + Settings.ANT_HIT_PENALTY);
+			sb.append("SCREEN_WIDTH: " + Settings.getScreenWidth() + "\n");
+			sb.append("SCREEN_HEIGHT: " + Settings.getScreenHeight() + "\n");
+			sb.append("SCREEN_BACKGROUND: " + Settings.getScreenBackground() + "\n");
+			sb.append("GOAL_X: " + Settings.getGoalX() + "\n");
+			sb.append("GOAL_Y: " + Settings.getGoalY() + "\n");
+			sb.append("GOAL_RADIUS: " + Settings.getGoalRadius() + "\n");
+			sb.append("GOAL_COLOR: " + Settings.getGoalColor() + "\n");
+			sb.append("OBSTACLE_COLOR: " + Settings.getObstacleColor() + "\n");
+			sb.append("ANT_LIFETIME: " + Settings.getAntLifetime() + "\n");
+			sb.append("ANT_POPULATION: " + Settings.getAntPopulation() + "\n");
+			sb.append("ANT_START_X: " + Settings.getAntStartX() + "\n");
+			sb.append("ANT_START_Y: " + Settings.getAntStartY() + "\n");
+			sb.append("ANT_COLOR: " + Settings.getAntColor() + "\n");
+			sb.append("ANT_SIZE: " + Settings.getAntSize() + "\n");
+			sb.append("ANT_SPEED: " + Settings.getAntSpeed() + "\n");
+			sb.append("ANT_MUTATION_RATE: " + Settings.getAntMutationRrate() + "\n");
+			sb.append("ANT_HIT_PENALTY: " + Settings.getAntHitPenalty());
 			
 			
 			

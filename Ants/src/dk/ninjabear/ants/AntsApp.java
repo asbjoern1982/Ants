@@ -26,10 +26,11 @@ public class AntsApp extends Application {
 	}
 	
 	public void start(Stage primaryStage) {
+		
 		primaryStage.setTitle("Ants");
 		BorderPane pane = new BorderPane();
 		initContent(pane);
-		primaryStage.setScene(new Scene(pane, Settings.SCREEN_WIDTH, Settings.SCREEN_HEIGHT));
+		primaryStage.setScene(new Scene(pane, Settings.getScreenWidth(), Settings.getScreenHeight()));
 		primaryStage.show();
 		
 		controller.init();
@@ -41,7 +42,14 @@ public class AntsApp extends Application {
 		root.setOnMousePressed(e -> controller.mousePressedAction(e));
 		root.setOnMouseDragged(e -> controller.mouseMovedAction(e));
 		root.setOnMouseReleased(e -> controller.mouseReleasedAction(e));
-		root.setStyle("-fx-background-color: black;");
+		
+		// convert to color to hex so it can be used in css
+		Color c = Settings.getScreenBackground();
+		String hex = String.format( "%02X%02X%02X",
+		            (int)( c.getRed() * 255 ),
+		            (int)( c.getGreen() * 255 ),
+		            (int)( c.getBlue() * 255 ) );
+		root.setStyle("-fx-background-color: #" + hex + ";");
 		pane.setCenter(root);
 		
 		MenuItem startMenuItem = new MenuItem("Start");
@@ -103,7 +111,7 @@ public class AntsApp extends Application {
 			x = e.getX();
 			y = e.getY();
 			rect = new Rectangle(x, y, 1, 1);
-			rect.setStroke(Settings.OBSTACLE_COLOR);
+			rect.setStroke(Settings.getObstacleColor());
 			rect.getStrokeDashArray().add(4.0);
 			root.getChildren().add(rect);
 		}
@@ -149,7 +157,7 @@ public class AntsApp extends Application {
 		}
 		
 		private void initAnts() {
-			for (int i = 0; i < Settings.ANT_POPULATION; i++)
+			for (int i = 0; i < Settings.getAntPopulation(); i++)
 				ants.add(new Ant());
 			root.getChildren().addAll(ants);
 			generations = 0;
@@ -162,8 +170,8 @@ public class AntsApp extends Application {
 			goal = new Goal();
 			root.getChildren().add(goal);
 			
-			Circle antStart = new Circle(Settings.ANT_START_X, Settings.ANT_START_Y, Settings.GOAL_RADIUS);
-			antStart.setStroke(Settings.ANT_COLOR);
+			Circle antStart = new Circle(Settings.getAntStartX(), Settings.getAntStartY(), Settings.getGoalRadius());
+			antStart.setStroke(Settings.getAntColor());
 			antStart.getStrokeDashArray().add(4.0);
 			root.getChildren().add(antStart);
 			
@@ -186,7 +194,7 @@ public class AntsApp extends Application {
 							ant.hitAnObstacle(obstacle);
 					}
 					
-					if (count++ > Settings.ANT_LIFETIME) {
+					if (count++ > Settings.getAntLifetime()) {
 						ArrayList<Ant> matingpool = new ArrayList<Ant>();
 						double lowestFitness = Double.MAX_VALUE;
 						double higestFitness = 0;
@@ -208,7 +216,7 @@ public class AntsApp extends Application {
 
 						root.getChildren().removeAll(ants);
 						ants.clear();
-						for (int i = 0; i < Settings.ANT_POPULATION; i++) {
+						for (int i = 0; i < Settings.getAntPopulation(); i++) {
 							Ant parent1 = matingpool.get((int)(matingpool.size()*Math.random()));
 							Ant parent2 = matingpool.get((int)(matingpool.size()*Math.random()));
 							Ant child = parent1.reproduce(parent2);

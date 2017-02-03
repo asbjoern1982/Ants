@@ -13,17 +13,17 @@ public class Ant extends Line {
 	private boolean hasReachedTheGoal = false;
 	
 	public Ant() {
-		super(Settings.ANT_START_X, Settings.ANT_START_Y, Settings.ANT_START_X+Settings.ANT_SIZE, Settings.ANT_START_Y);
-		setStroke(Settings.ANT_COLOR);
+		super(Settings.getAntStartX(), Settings.getAntStartY(), Settings.getAntStartX()+Settings.getAntSize(), Settings.getAntStartY());
+		setStroke(Settings.getAntColor());
 		setStrokeWidth(3);
 		
-		genes = new double[Settings.ANT_LIFETIME];
-		for (int i = 0; i < Settings.ANT_LIFETIME; i++)
+		genes = new double[Settings.getAntLifetime()];
+		for (int i = 0; i < Settings.getAntLifetime(); i++)
 			genes[i] = Math.random() * 360;
 	}
 	
 	private Ant(double[] genes) {
-		super(Settings.ANT_START_X, Settings.ANT_START_Y, Settings.ANT_START_X+Settings.ANT_SIZE, Settings.ANT_START_Y);
+		super(Settings.getAntStartX(), Settings.getAntStartY(), Settings.getAntStartX()+Settings.getAntSize(), Settings.getAntStartY());
 		setStroke(Color.RED);
 		setStrokeWidth(3);
 		this.genes = genes;
@@ -36,26 +36,26 @@ public class Ant extends Line {
 		d = genes[age];
 		age++;
 	
-		x += Math.cos(Math.toRadians(d)) * Settings.ANT_SPEED;
-		y += Math.sin(Math.toRadians(d)) * Settings.ANT_SPEED;
+		x += Math.cos(Math.toRadians(d)) * Settings.getAntSpeed();
+		y += Math.sin(Math.toRadians(d)) * Settings.getAntSpeed();
 		this.setTranslateX(x);
 		this.setTranslateY(y);
 		this.setRotate(d);
 	}
 	
 	public void reachedGoal() {
-		double x1 = Settings.ANT_START_X + x;
-		double y1 = Settings.ANT_START_Y + y;
-		double x2 = Settings.GOAL_X;
-		double y2 = Settings.GOAL_Y;
+		double x1 = Settings.getAntStartX() + x;
+		double y1 = Settings.getAntStartY() + y;
+		double x2 = Settings.getGoalX();
+		double y2 = Settings.getGoalY();
 		double distance = Math.sqrt((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1));
-		if (distance < Settings.GOAL_RADIUS)
+		if (distance < Settings.getGoalRadius())
 			hasReachedTheGoal = true;
 	}
 	
 	public void hitAnObstacle(Obstacle obstacle) {
-		double x1 = Settings.ANT_START_X + x;
-		double y1 = Settings.ANT_START_Y + y;
+		double x1 = Settings.getAntStartX() + x;
+		double y1 = Settings.getAntStartY() + y;
 		if (	x1 > obstacle.getX() && 
 				x1 < obstacle.getX() + obstacle.getWidth() &&
 				y1 > obstacle.getY() && 
@@ -67,17 +67,17 @@ public class Ant extends Line {
 		if (hasReachedTheGoal)
 			return 1;
 		
-		double x1 = Settings.ANT_START_X + x;
-		double y1 = Settings.ANT_START_Y + y;
-		double x2 = Settings.GOAL_X;
-		double y2 = Settings.GOAL_Y;
+		double x1 = Settings.getAntStartX() + x;
+		double y1 = Settings.getAntStartY() + y;
+		double x2 = Settings.getGoalX();
+		double y2 = Settings.getGoalY();
 
 		// calculate distance
 		double distance = Math.sqrt((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1));
 		
 		// if it has hit something, lower the fitness
 		if (hasHitAnObstacle)
-			distance *= Settings.ANT_HIT_PENALTY;
+			distance *= Settings.getAntHitPenalty();
 
 		// normalise
 		return 1/distance;
@@ -94,7 +94,7 @@ public class Ant extends Line {
 
 		// mutate
 		for (int i = 0; i < childGenes.length; i++) {
-			if (Math.random() <= Settings.ANT_MUTATION_RATE)
+			if (Math.random() <= Settings.getAntMutationRrate())
 				childGenes[i] = Math.random() * 360;
 		}
 
