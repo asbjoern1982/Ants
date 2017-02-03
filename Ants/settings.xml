@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="GOAL_COLOR">0x90ee90ff</entry>
+<entry key="ANT_SIZE">10.0</entry>
+<entry key="SCREEN_HEIGHT">600.0</entry>
+<entry key="ANT_LIFETIME">200</entry>
+<entry key="ANT_HIT_PENALTY">1.5</entry>
+<entry key="GOAL_RADIUS">30.0</entry>
+<entry key="SCREEN_WIDTH">1000.0</entry>
+<entry key="ANT_POPULATION">1000</entry>
+<entry key="GOAL_Y">300.0</entry>
+<entry key="OBSTACLE_COLOR">0xd3d3d3ff</entry>
+<entry key="ANT_START_Y">300.0</entry>
+<entry key="GOAL_X">900.0</entry>
+<entry key="ANT_START_X">100.0</entry>
+<entry key="ANT_SPEED">10.0</entry>
+<entry key="SCREEN_BACKGROUND">0x000000ff</entry>
+<entry key="ANT_COLOR">0xff0000ff</entry>
+<entry key="ANT_MUTATION_RATE">0.02</entry>
+</properties>
