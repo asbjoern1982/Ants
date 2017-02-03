@@ -49,7 +49,7 @@ public class AntsApp extends Application {
 		startMenuItem.setAccelerator(KeyCombination.keyCombination("F1"));
 		
 		MenuItem pauseMenuItem = new MenuItem("Pause");
-		pauseMenuItem.setOnAction(e -> controller.stopAction());
+		pauseMenuItem.setOnAction(e -> controller.pauseAction());
 		pauseMenuItem.setAccelerator(KeyCombination.keyCombination("F2"));
 		
 		MenuItem resetMenuItem = new MenuItem("Reset Ants");
@@ -86,6 +86,7 @@ public class AntsApp extends Application {
 		private ArrayList<Ant> ants = new ArrayList<>();
 		private ArrayList<Obstacle> obstacles = new ArrayList<>();
 		private AnimationTimer animationtimer;
+		private boolean animationtimerrunning = false;
 		
 		private Text generationText = new Text("Generations: 0");
 		private int generations;
@@ -144,6 +145,7 @@ public class AntsApp extends Application {
 			root.getChildren().removeAll(ants);
 			ants.clear();
 			initAnts();
+			animationtimerrunning = false;
 		}
 		
 		private void initAnts() {
@@ -227,14 +229,20 @@ public class AntsApp extends Application {
 			ants.clear();
 			obstacles.clear();
 			init();
+			animationtimerrunning = false;
 		}
 		
 		public void startAction() {
 			animationtimer.start();
+			animationtimerrunning = true;
 		}
 		
-		public void stopAction() {
-			animationtimer.stop();
+		public void pauseAction() {
+			if (animationtimerrunning)
+				animationtimer.stop();
+			else
+				animationtimer.start();
+			animationtimerrunning = !animationtimerrunning;
 		}
 		
 		public void showSettingsViewAction() {
