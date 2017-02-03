@@ -254,9 +254,10 @@ public class AntsApp extends Application {
 		}
 		
 		public void showSettingsViewAction() {
-			if (settingsDialog == null) {
+			if (settingsDialog == null)
 				settingsDialog = new SettingsDialog();
-			}
+			else
+				settingsDialog.resetControls();
 			settingsDialog.showAndWait();
 		}
 	}
