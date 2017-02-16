@@ -85,12 +85,19 @@ public class AntsApp extends Application {
 		pane.setTop(bar);
 	}
 	
+	public Pane getRoot() {return controller.root;}
+	public Goal getGoal() {return controller.goal;}
+	public Circle getAntStart() {return controller.antStart;}
+	public ArrayList<Ant> getAnts() {return controller.ants;}
+	public ArrayList<Obstacle> getObstacles() {return controller.obstacles;}
+	
 	private class Controller {
 		private Pane root;
 		private boolean drawing = false;
 		private double x,y;
 		private Rectangle rect;
 		private Goal goal;
+		private Circle antStart;
 		private ArrayList<Ant> ants = new ArrayList<>();
 		private ArrayList<Obstacle> obstacles = new ArrayList<>();
 		private AnimationTimer animationtimer;
@@ -170,9 +177,10 @@ public class AntsApp extends Application {
 			goal = new Goal();
 			root.getChildren().add(goal);
 			
-			Circle antStart = new Circle(Settings.getAntStartX(), Settings.getAntStartY(), Settings.getGoalRadius());
+			antStart = new Circle(Settings.getAntStartX(), Settings.getAntStartY(), Settings.getGoalRadius());
 			antStart.setStroke(Settings.getAntColor());
 			antStart.getStrokeDashArray().add(4.0);
+			antStart.setFill(null);
 			root.getChildren().add(antStart);
 			
 			generationText.setX(5);
@@ -255,7 +263,7 @@ public class AntsApp extends Application {
 		
 		public void showSettingsViewAction() {
 			if (settingsDialog == null)
-				settingsDialog = new SettingsDialog();
+				settingsDialog = new SettingsDialog(AntsApp.this);
 			else
 				settingsDialog.resetControls();
 			settingsDialog.showAndWait();

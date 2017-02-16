@@ -9,15 +9,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class SettingsDialog extends Stage {
 	private final Controller controller = new Controller();
-	public SettingsDialog() {
+	public SettingsDialog(AntsApp app) {
+		controller.app = app;
 		initModality(Modality.APPLICATION_MODAL);
-		//ssetResizable(false);
+		setResizable(false);
 		setTitle("Settings");
 
 		GridPane pane = new GridPane();
@@ -128,6 +131,8 @@ public class SettingsDialog extends Stage {
 	}
 	
 	private class Controller {
+		private AntsApp app;
+		
 		public void updateControls() {
 			screenWidthTextField.setText("" + Settings.getScreenWidth());
 			screenHeightTextField.setText("" + Settings.getScreenHeight());
@@ -180,6 +185,43 @@ public class SettingsDialog extends Stage {
 			double antHitPenalty = getDouble(antHitPenaltyTextField);
 			
 			if (parseSucces) {
+				if (screenWidth != Settings.getScreenWidth() || 
+						screenHeight != Settings.getScreenHeight() || 
+						!screenBackground.equals(Settings.getScreenBackground())) {
+					app.getRoot().getScene().getWindow().setWidth(screenWidth);
+					app.getRoot().getScene().getWindow().setHeight(screenHeight);
+					Color c = screenBackground;
+					String hex = String.format( "%02X%02X%02X",
+					            (int)( c.getRed() * 255 ),
+					            (int)( c.getGreen() * 255 ),
+					            (int)( c.getBlue() * 255 ) );
+					app.getRoot().setStyle("-fx-background-color: #" + hex + ";");
+				}
+				
+				if (goalX != Settings.getGoalX() ||
+						goalY != Settings.getGoalY() ||
+						goalRadius != Settings.getGoalRadius() ||
+						!goalColor.equals(Settings.getGoalColor())) {
+					app.getGoal().setCenterX(goalX);
+					app.getGoal().setCenterY(goalY);
+					app.getGoal().setFill(goalColor);		
+				}
+				
+				if (!obstacleColor.equals(Settings.getObstacleColor()))
+					for (Obstacle obstacle : app.getObstacles())
+						obstacle.setFill(obstacleColor);
+
+				if (antStartX != Settings.getAntStartX() ||
+						antStartY != Settings.getAntStartY() ||
+						!antColor.equals(Settings.getAntColor())) {
+					for (Ant ant : app.getAnts())
+						ant.setStroke(antColor);;
+					Circle c = app.getAntStart();
+					c.setCenterX(antStartX);
+					c.setCenterY(antStartY);
+					c.setStroke(antColor);
+				}
+				
 				Settings.set(screenWidth, screenHeight, screenBackground, goalX, goalY, goalRadius, goalColor, obstacleColor, antLifetime, antPopulation, antStartX, antStartY, antColor, antSize, antSpeed, antMutationRate, antHitPenalty);
 				SettingsDialog.this.hide();
 			}

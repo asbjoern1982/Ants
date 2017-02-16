@@ -9,26 +9,23 @@ import java.util.Properties;
 import javafx.scene.paint.Color;
 
 public class Settings {
-	public static final String[] KEYS = {
-		"SCREEN_WIDTH",
-		"SCREEN_HEIGHT",
-		"SCREEN_BACKGROUND",
-		"GOAL_X",
-		"GOAL_Y",
-		"GOAL_RADIUS",
-		"GOAL_COLOR",
-		"OBSTACLE_COLOR",
-		"ANT_LIFETIME",
-		"ANT_POPULATION",
-		"ANT_START_X",
-		"ANT_START_Y",
-		"ANT_COLOR",
-		"ANT_SIZE",
-		"ANT_SPEED",
-		"ANT_MUTATION_RATE",
-		"ANT_HIT_PENALTY"
-	};
-	
+	private static final String SCREEN_WIDTH = "SCREEN_WIDTH";
+	private static final String SCREEN_HEIGHT = "SCREEN_HEIGHT";
+	private static final String SCREEN_BACKGROUND ="SCREEN_BACKGROUND";
+	private static final String GOAL_X = "GOAL_X";
+	private static final String GOAL_Y = "GOAL_Y";
+	private static final String GOAL_RADIUS = "GOAL_RADIUS";
+	private static final String GOAL_COLOR = "GOAL_COLOR";
+	private static final String OBSTACLE_COLOR = "OBSTACLE_COLOR";
+	private static final String ANT_LIFETIME = "ANT_LIFETIME";
+	private static final String ANT_POPULATION = "ANT_POPULATION";
+	private static final String ANT_START_X = "ANT_START_X";
+	private static final String ANT_START_Y = "ANT_START_Y";
+	private static final String ANT_COLOR = "ANT_COLOR";
+	private static final String ANT_SIZE = "ANT_SIZE";
+	private static final String ANT_SPEED = "ANT_SPEED";
+	private static final String ANT_MUTATION_RATE = "ANT_MUTATION_RATE";
+	private static final String ANT_HIT_PENALTY = "ANT_HIT_PENALTY";
 	
 	private static boolean notLoaded = true;
 
@@ -67,26 +64,26 @@ public class Settings {
 		}
 		
 		try {
-			screenWidth = 	Double.parseDouble((String) p.get(KEYS[0]));
-			screenHeight = 	Double.parseDouble((String) p.get(KEYS[1]));
-			screenBackground = Color.valueOf((String) p.get(KEYS[2]));
+			screenWidth = 	Double.parseDouble((String) p.get(SCREEN_WIDTH));
+			screenHeight = 	Double.parseDouble((String) p.get(SCREEN_HEIGHT));
+			screenBackground = Color.valueOf((String) p.get(SCREEN_BACKGROUND));
 			
-			goalX = 		Double.parseDouble((String) p.get(KEYS[3]));
-			goalY = 		Double.parseDouble((String) p.get(KEYS[4]));
-			goalRadius = 	Double.parseDouble((String) p.get(KEYS[5]));
-			goalColor = 	Color.valueOf((String) p.get(KEYS[6]));
+			goalX = 		Double.parseDouble((String) p.get(GOAL_X));
+			goalY = 		Double.parseDouble((String) p.get(GOAL_Y));
+			goalRadius = 	Double.parseDouble((String) p.get(GOAL_RADIUS));
+			goalColor = 	Color.valueOf((String) p.get(GOAL_COLOR));
 
-			obstacleColor = Color.valueOf((String) p.get(KEYS[7]));
+			obstacleColor = Color.valueOf((String) p.get(OBSTACLE_COLOR));
 			
-			antLifetime = 	Integer.parseInt((String) p.get(KEYS[8]));
-			antPopulation = Integer.parseInt((String) p.get(KEYS[9]));
-			antStartX = 	Double.parseDouble((String) p.get(KEYS[10]));
-			antStartY = 	Double.parseDouble((String) p.get(KEYS[11])); 
-			antColor = 		Color.valueOf((String) p.get(KEYS[12]));
-			antSize = 		Double.parseDouble((String) p.get(KEYS[13]));
-			antSpeed = 		Double.parseDouble((String) p.get(KEYS[14]));
-			antMutationRate = Double.parseDouble((String) p.get(KEYS[15]));
-			antHitPenalty = Double.parseDouble((String) p.get(KEYS[16]));
+			antLifetime = 	Integer.parseInt((String) p.get(ANT_LIFETIME));
+			antPopulation = Integer.parseInt((String) p.get(ANT_POPULATION));
+			antStartX = 	Double.parseDouble((String) p.get(ANT_START_X));
+			antStartY = 	Double.parseDouble((String) p.get(ANT_START_Y)); 
+			antColor = 		Color.valueOf((String) p.get(ANT_COLOR));
+			antSize = 		Double.parseDouble((String) p.get(ANT_SIZE));
+			antSpeed = 		Double.parseDouble((String) p.get(ANT_SPEED));
+			antMutationRate = Double.parseDouble((String) p.get(ANT_MUTATION_RATE));
+			antHitPenalty = Double.parseDouble((String) p.get(ANT_HIT_PENALTY));
 		} catch (NumberFormatException nfe) {
 			System.err.println(nfe);
 			loadDefault();
@@ -143,23 +140,23 @@ public class Settings {
 	private static void storeSettings() {
 		Properties p = new Properties();
 		
-		p.put(KEYS[0], "" + screenWidth);
-		p.put(KEYS[1], "" + screenHeight);
-		p.put(KEYS[2], "" + screenBackground);
-		p.put(KEYS[3], "" + goalX);
-		p.put(KEYS[4], "" + goalY);
-		p.put(KEYS[5], "" + goalRadius);
-		p.put(KEYS[6], "" + goalColor);
-		p.put(KEYS[7], "" + obstacleColor);
-		p.put(KEYS[8], "" + antLifetime);
-		p.put(KEYS[9], "" + antPopulation);
-		p.put(KEYS[10], "" + antStartX);
-		p.put(KEYS[11], "" + antStartY);
-		p.put(KEYS[12], "" + antColor);
-		p.put(KEYS[13], "" + antSize);
-		p.put(KEYS[14], "" + antSpeed);
-		p.put(KEYS[15], "" + antMutationRate);
-		p.put(KEYS[16], "" + antHitPenalty);
+		p.put(SCREEN_WIDTH, 		"" + screenWidth);
+		p.put(SCREEN_HEIGHT, 		"" + screenHeight);
+		p.put(SCREEN_BACKGROUND, 	"" + screenBackground);
+		p.put(GOAL_X, 				"" + goalX);
+		p.put(GOAL_Y, 				"" + goalY);
+		p.put(GOAL_RADIUS, 			"" + goalRadius);
+		p.put(GOAL_COLOR, 			"" + goalColor);
+		p.put(OBSTACLE_COLOR,		"" + obstacleColor);
+		p.put(ANT_LIFETIME, 		"" + antLifetime);
+		p.put(ANT_POPULATION, 		"" + antPopulation);
+		p.put(ANT_START_X, 			"" + antStartX);
+		p.put(ANT_START_Y, 			"" + antStartY);
+		p.put(ANT_COLOR,			"" + antColor);
+		p.put(ANT_SIZE, 			"" + antSize);
+		p.put(ANT_SPEED, 			"" + antSpeed);
+		p.put(ANT_MUTATION_RATE, 	"" + antMutationRate);
+		p.put(ANT_HIT_PENALTY, 		"" + antHitPenalty);
 		
 		try (FileOutputStream outStream = new FileOutputStream(new File("settings.xml"))) {
 			p.storeToXML(outStream, null);

@@ -1,5 +1,7 @@
 package dk.ninjabear.ants;
 
+import java.util.Random;
+
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
@@ -18,8 +20,9 @@ public class Ant extends Line {
 		setStrokeWidth(3);
 		
 		genes = new double[Settings.getAntLifetime()];
+		Random random = new Random();
 		for (int i = 0; i < Settings.getAntLifetime(); i++)
-			genes[i] = Math.random() * 360;
+			genes[i] = random.nextDouble() * 360;
 	}
 	
 	private Ant(double[] genes) {
@@ -84,12 +87,20 @@ public class Ant extends Line {
 	}
 	
 	public Ant reproduce(Ant other) {
-		double[] childGenes = new double[genes.length];
-		for (int i = 0; i < genes.length/2; i++) {
+		double[] childGenes = new double[Settings.getAntLifetime()];
+
+		// if the lifetime is smaller in settings than the parents, use settings' value
+		int limit = Settings.getAntLifetime() < genes.length ? Settings.getAntLifetime() : genes.length;
+		for (int i = 0; i < limit/2; i++)
 			childGenes[i] = genes[i];
-		}
-		for (int i = genes.length/2+1; i < genes.length; i++) {
+		for (int i = limit/2+1; i < limit; i++)
 			childGenes[i] = other.genes[i];
+
+		// if the lifetime is larger in settings than the parents, random elements need to be put in the end
+		if (Settings.getAntLifetime() > genes.length) {
+			Random ran = new Random();
+			for (int i = genes.length; i < Settings.getAntLifetime(); i++)
+				childGenes[i] = ran.nextDouble()*360;
 		}
 
 		// mutate
